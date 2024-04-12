@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import { navBar } from './navbar.component';
+import NavBar from '../imports/ui/components/NavBar';
 import { ComponentIDs, PageIDs } from '../imports/ui/utilities/ids';
 
 class SignInPage {
@@ -19,7 +19,7 @@ class SignInPage {
     await testController.typeText(`#${ComponentIDs.signInFormEmail}`, username);
     await testController.typeText(`#${ComponentIDs.signInFormPassword}`, password);
     await testController.click(`#${ComponentIDs.signInFormSubmit} input.btn.btn-primary`);
-    await navBar.isLoggedIn(testController, username);
+    await NavBar.isLoggedIn(testController, username);
   }
 }
 
