@@ -26,7 +26,7 @@ const MakeCard = ({ clubs }) => (
   <Col>
     <Card className="h-100">
       <Card.Body>
-        <Card.Img src={clubs.picture} width={50} />
+        <Card.Img src={clubs.contact} width={50} />
         <Card.Title style={{ marginTop: '0px' }}>{clubs.name}</Card.Title>
         <Card.Subtitle>
           <span className="date">{clubs.title}</span>
@@ -39,7 +39,7 @@ const MakeCard = ({ clubs }) => (
         {clubs.interests.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
       </Card.Body>
       <Card.Body>
-        {project.participants.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
+        {clubs.participants.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
       </Card.Body>
     </Card>
   </Col>
@@ -57,12 +57,12 @@ MakeCard.propTypes = {
 };
 
 /* Renders the Project Collection as a set of Cards. */
-const ProjectsPage = () => {
+const ClubsPagesPage = () => {
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(ProfilesClubs.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
-    const sub3 = Meteor.subscribe(ProjectsInterests.userPublicationName);
+    const sub3 = Meteor.subscribe(ClubsInterests.userPublicationName);
     const sub4 = Meteor.subscribe(Profiles.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready(),
@@ -79,4 +79,4 @@ const ProjectsPage = () => {
   ) : <LoadingSpinner />;
 };
 
-export default ProjectsPage;
+export default ClubsPage;
