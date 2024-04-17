@@ -18,7 +18,7 @@ import { PageIDs } from '../utilities/ids';
 function getInterestData(name) {
   const profiles = _.pluck(ProfilesInterests.collection.find({ interest: name }).fetch(), 'profile');
   const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile }).picture);
-  const projects = _.pluck(ProjectsInterests.collection.find({ interest: name }).fetch(), 'project');
+  const projects = _.pluck(ClubsInterests.collection.find({ interest: name }).fetch(), 'project');
   const projectPictures = projects.map(project => Clubs.collection.findOne({ name: project })?.picture);
   // console.log(_.extend({ }, data, { interests, projects: projectPictures }));
   return _.extend({}, { name, profiles: profilePictures, projects: projectPictures });
@@ -53,7 +53,7 @@ const InterestsPage = () => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(ProfilesClubs.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
-    const sub3 = Meteor.subscribe(ProjectsInterests.userPublicationName);
+    const sub3 = Meteor.subscribe(ClubsInterests.userPublicationName);
     const sub4 = Meteor.subscribe(Profiles.userPublicationName);
     const sub5 = Meteor.subscribe(Interests.userPublicationName);
     const sub6 = Meteor.subscribe(ProfilesInterests.userPublicationName);
