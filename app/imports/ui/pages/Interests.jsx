@@ -31,7 +31,7 @@ const MakeCard = ({ interest }) => (
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{interest.name}</Card.Title>
         {interest.profiles.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
-        {interest.projects.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
+        {interest.clubs.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
       </Card.Body>
     </Card>
   </Col>
