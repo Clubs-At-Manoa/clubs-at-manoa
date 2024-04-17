@@ -3,7 +3,7 @@ import { Clubs } from '../../api/clubs/Clubs';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
 import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
-import { ProjectsInterests } from '../../api/clubs/ProjectsInterests';
+import { ProjectsInterests } from '../../api/clubs/ClubsInterests';
 
 /**
  * In Bowfolios, insecure mode is enabled, so it is possible to update the server's Mongo database by making
