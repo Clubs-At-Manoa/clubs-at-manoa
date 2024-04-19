@@ -34,7 +34,6 @@ if (ProfilesClubs && ProfilesClubs.userPublicationName && ProfilesClubs.collecti
   console.error('Error publishing ProfilesClubs: missing data');
 }
 
-
 /** Define a publication to publish all projects. */
 if (Clubs && Clubs.userPublicationName && Clubs.collection) {
   Meteor.publish(Clubs.userPublicationName, () => Clubs.collection.find());
