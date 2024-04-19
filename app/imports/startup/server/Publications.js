@@ -4,7 +4,7 @@ import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
 import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
 import { Clubs } from '../../api/clubs/Clubs';
-import { ProjectsInterests } from '../../api/clubs/ClubsInterests';
+import { ClubsInterests } from '../../api/clubs/ClubsInterests';
 
 /** Define a publication to publish all interests. */
 if (Interests && Interests.userPublicationName && Interests.collection) {
@@ -42,8 +42,8 @@ if (Clubs && Clubs.userPublicationName && Clubs.collection) {
 }
 
 /** Define a publication to publish this collection. */
-if (ProjectsInterests && ProjectsInterests.userPublicationName && ProjectsInterests.collection) {
-  Meteor.publish(ProjectsInterests.userPublicationName, () => ProjectsInterests.collection.find());
+if (ClubsInterests && ClubsInterests.userPublicationName && ClubsInterests.collection) {
+  Meteor.publish(ClubsInterests.userPublicationName, () => ClubsInterests.collection.find());
 } else {
   console.error('Error publishing ProjectsInterests: missing data');
 }
