@@ -2,18 +2,16 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /** Encapsulates state and variable values for this collection. */
-class ClubsCollection {
+class ProjectsInterestsCollection {
   constructor() {
     // The name of this collection.
-    this.name = 'ClubsCollection';
+    this.name = 'ProjectsInterestsCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      name: { type: String, index: true, unique: true },
-      homepage: { type: String, optional: true },
-      description: { type: String, optional: true },
-      contact: { type: String, optional: true },
+      project: String,
+      interest: String,
     });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
@@ -23,4 +21,4 @@ class ClubsCollection {
   }
 }
 
-export const Clubs = new ClubsCollection();
+export const ProjectsInterests = new ProjectsInterestsCollection();
