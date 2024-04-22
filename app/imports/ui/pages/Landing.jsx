@@ -8,25 +8,53 @@ const Landing = () => (
     <div className="landing-green-background">
       <Container className="text-center">
         <h1 style={{ paddingTop: '20px', color: 'white', fontSize: '36pt' }}>
-          Welcome to Clubs At Mānoa
+          Welcome to Bowfolios
         </h1>
-        <h3 style={{ paddingBottom: '20px', color: 'white' }}> Over 150 Registered Independent Organizations (RIOs) at the University of Hawaiʻi at Mānoa <br />
-          Serving the campus and greater community
+        <h3 style={{ paddingBottom: '20px', color: 'white' }}>
+          Profiles, projects, and interest areas for the UH Community
         </h3>
       </Container>
     </div>
     <div className="landing-white-background">
-      <Container className="d-flex justify-content-center align-items-center text-center">
-        <Row md={1} lg={5}>
-          <Col xs={6} className="align-middle text-center">
-            <Image src="/images/Manoa_4.jpg" width={900} />
+      <Container className="justify-content-center text-center">
+        <h2 style={{ color: '#376551' }}>Start by making your profile....</h2>
+        <Row md={1} lg={2}>
+          <Col xs={6}>
+            <Image src="/images/home-page.png" width={500} />
+          </Col>
+          <Col xs={6}>
+            <Image src="/images/profiles-page.png" width={500} />
+          </Col>
+        </Row>
+      </Container>
+    </div>
+    <div className="landing-green-background">
+      <Container className="justify-content-center text-center">
+        <h2 style={{ color: 'white' }}>...then add your projects</h2>
+        <Row md={1} lg={2}>
+          <Col xs={6}>
+            <Image src="/images/add-project-page.png" width={500} />
+          </Col>
+          <Col xs={6}>
+            <Image src="/images/projects-page.png" width={500} />
           </Col>
         </Row>
       </Container>
     </div>
     <div className="landing-white-background text-center">
-      <h2 style={{ color: '#376551' }}> Connect to people and organizations with shared interests!
+      <h2 style={{ color: '#376551' }}>
+        Connect to people and projects with shared interests!
       </h2>
+      <Container>
+        <Row md={1} lg={2}>
+          <Col xs={6}>
+            <Image src="/images/interests-page.png" width={500} />
+          </Col>
+          <Col xs={6}>
+            <Image src="/images/filter-page.png" width={500} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   </div>
 );
