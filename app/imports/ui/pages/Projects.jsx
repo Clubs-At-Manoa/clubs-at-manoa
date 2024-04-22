@@ -5,41 +5,41 @@ import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
-import { Clubs } from '../../api/clubs/Clubs';
-import { ClubsInterests } from '../../api/clubs/ClubsInterests';
+import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { Projects } from '../../api/projects/Projects';
+import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
 /* Gets the Project data as well as Profiles and Interests associated with the passed Project name. */
 function getProjectData(name) {
-  const data = Clubs.collection.findOne({ name });
-  const interests = _.pluck(ClubsInterests.collection.find({ project: name }).fetch(), 'interest');
-  const profiles = _.pluck(ProfilesClubs.collection.find({ project: name }).fetch(), 'club');
+  const data = Projects.collection.findOne({ name });
+  const interests = _.pluck(ProjectsInterests.collection.find({ project: name }).fetch(), 'interest');
+  const profiles = _.pluck(ProfilesProjects.collection.find({ project: name }).fetch(), 'profile');
   const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile })?.picture);
   return _.extend({}, data, { interests, participants: profilePictures });
 }
 
-/* Component for layout out a Club Card. */
-const MakeCard = ({ clubs }) => (
+/* Component for layout out a Project Card. */
+const MakeCard = ({ project }) => (
   <Col>
     <Card className="h-100">
       <Card.Body>
-        <Card.Img src={clubs.contact} width={50} />
-        <Card.Title style={{ marginTop: '0px' }}>{clubs.name}</Card.Title>
+        <Card.Img src={project.picture} width={50} />
+        <Card.Title style={{ marginTop: '0px' }}>{project.name}</Card.Title>
         <Card.Subtitle>
-          <span className="date">{clubs.title}</span>
+          <span className="date">{project.title}</span>
         </Card.Subtitle>
         <Card.Text>
-          {clubs.description}
+          {project.description}
         </Card.Text>
       </Card.Body>
       <Card.Body>
-        {clubs.interests.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
+        {project.interests.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
       </Card.Body>
       <Card.Body>
-        {clubs.participants.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
+        {project.participants.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
       </Card.Body>
     </Card>
   </Col>
@@ -57,18 +57,18 @@ MakeCard.propTypes = {
 };
 
 /* Renders the Project Collection as a set of Cards. */
-const ClubsPagesPage = () => {
+const ProjectsPage = () => {
   const { ready } = useTracker(() => {
     // Ensure that minimongo is populated with all collections prior to running render().
-    const sub1 = Meteor.subscribe(ProfilesClubs.userPublicationName);
-    const sub2 = Meteor.subscribe(Clubs.userPublicationName);
-    const sub3 = Meteor.subscribe(ClubsInterests.userPublicationName);
+    const sub1 = Meteor.subscribe(ProfilesProjects.userPublicationName);
+    const sub2 = Meteor.subscribe(Projects.userPublicationName);
+    const sub3 = Meteor.subscribe(ProjectsInterests.userPublicationName);
     const sub4 = Meteor.subscribe(Profiles.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready(),
     };
   }, []);
-  const projects = _.pluck(Clubs.collection.find().fetch(), 'name');
+  const projects = _.pluck(Projects.collection.find().fetch(), 'name');
   const projectData = projects.map(project => getProjectData(project));
   return ready ? (
     <Container id={PageIDs.projectsPage} style={pageStyle}>
@@ -79,4 +79,4 @@ const ClubsPagesPage = () => {
   ) : <LoadingSpinner />;
 };
 
-export default ClubsPage;
+export default ProjectsPage;

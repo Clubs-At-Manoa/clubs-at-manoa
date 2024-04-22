@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
-import { Clubs } from '../../api/clubs/Clubs';
-import { ProjectsInterests } from '../../api/clubs/ClubsInterests';
+import { Projects } from '../../api/projects/Projects';
+import { ProjectsInterests } from '../../api/projects/ProjectsInterests';
 import { Profiles } from '../../api/profiles/Profiles';
-import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
+import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
 import { Interests } from '../../api/interests/Interests';
 
@@ -33,7 +33,7 @@ function addProfile({ firstName, lastName, bio, title, interests, projects, pict
   Profiles.collection.insert({ firstName, lastName, bio, title, picture, email });
   // Add interests and projects.
   interests.map(interest => ProfilesInterests.collection.insert({ profile: email, interest }));
-  projects.map(project => ProfilesClubs.collection.insert({ profile: email, project }));
+  projects.map(project => ProfilesProjects.collection.insert({ profile: email, project }));
   // Make sure interests are defined in the Interests collection if they weren't already.
   interests.map(interest => addInterest(interest));
 }
@@ -41,7 +41,7 @@ function addProfile({ firstName, lastName, bio, title, interests, projects, pict
 /** Define a new project. Error if project already exists.  */
 function addProject({ name, homepage, description, interests, picture }) {
   console.log(`Defining project ${name}`);
-  Clubs.collection.insert({ name, homepage, description, picture });
+  Projects.collection.insert({ name, homepage, description, picture });
   interests.map(interest => ProjectsInterests.collection.insert({ project: name, interest }));
   // Make sure interests are defined in the Interests collection if they weren't already.
   interests.map(interest => addInterest(interest));
