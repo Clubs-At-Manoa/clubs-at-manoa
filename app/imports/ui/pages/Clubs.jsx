@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Badge, Container, Card, Image, Row, Col } from 'react-bootstrap';
+import { Badge, Container, Card, Image, Row, Col, Collapse, Button } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
@@ -18,27 +18,45 @@ function getProjectData(name) {
 }
 
 /* Component for layout out a Club Card. */
-const MakeCard = ({ project }) => (
-  <Col>
-    <Card className="h-100">
-      <Card.Body>
-        <Card.Title style={{ marginTop: '0px' }}>{project.name}</Card.Title>
-        <Card.Subtitle>{project.clubType}</Card.Subtitle>
-        <Card.Text>{project.description}</Card.Text>
-        <Card.Text>Approved Date: {project.approvedDate}</Card.Text>
-        <Card.Text>Expiration Date: {project.expirationDate}</Card.Text>
-        <Card.Text>Manager: {project.clubManager}</Card.Text>
-        <Card.Text>Contact: {project.contact}</Card.Text>
-        <div>
-          Interests: {project.interests?.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
-        </div>
-        <div>
-          Participants: {project.participants?.map((participant, index) => <Image key={index} roundedCircle src={participant} width={50}/>)}
-        </div>
-      </Card.Body>
-    </Card>
-  </Col>
-);
+const MakeCard = ({ project }) => {
+  // State to control the visibility of the Collapse component
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Col>
+      <Card className="h-100">
+        <Card.Body>
+          <Card.Title style={{ marginTop: '0px' }}>{project.name}</Card.Title>
+          <Card.Subtitle>{project.clubType}</Card.Subtitle>
+          <Card.Text>{project.description}</Card.Text>
+          <Card.Text>Approved Date: {project.approvedDate}</Card.Text>
+          <Card.Text>Expiration Date: {project.expirationDate}</Card.Text>
+          <Card.Text>Manager: {project.clubManager}</Card.Text>
+          <Card.Text>Contact: {project.contact}</Card.Text>
+          <Button
+            onClick={() => setOpen(!open)}
+            aria-controls="example-collapse-text"
+            aria-expanded={open}
+            variant="link"
+          >
+            Show Purpose
+          </Button>
+          <Collapse in={open}>
+            <div id="example-collapse-text">
+              <Card.Text>Purpose: {project.purpose}</Card.Text>
+            </div>
+          </Collapse>
+          <div>
+            Interests: {project.interests?.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
+          </div>
+          <div>
+            Participants: {project.participants?.map((participant, index) => <Image key={index} roundedCircle src={participant} width={50} />)}
+          </div>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+};
 
 MakeCard.propTypes = {
   project: PropTypes.shape({
