@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { Clubs } from '../../api/clubs/Clubs';
-import { ProjectsInterests } from '../../api/clubs/ClubsInterests';
+import { ClubsInterests } from '../../api/clubs/ClubsInterests';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
@@ -38,39 +38,31 @@ function addProfile({ firstName, lastName, bio, title, interests, projects, pict
   interests.map(interest => addInterest(interest));
 }
 
-/** Define a new project. Error if project already exists.  */
-function addProject({ name, homepage, description, interests, picture }) {
-  console.log(`Defining project ${name}`);
-  Clubs.collection.insert({ name, homepage, description, picture });
-  interests.map(interest => ProjectsInterests.collection.insert({ project: name, interest }));
-  // Make sure interests are defined in the Interests collection if they weren't already.
-  interests.map(interest => addInterest(interest));
+/** Define a new club. Error if club already exists. */
+function addClub({ name, approvedDate, expirationDate, clubType, purpose, clubManager, contact, interests }) {
+  console.log(`Defining club ${name}`);
+  Clubs.collection.insert({ name, approvedDate, expirationDate, clubType, purpose, clubManager, contact, interests });
+  interests.forEach(interest => ClubsInterests.collection.insert({ project: name, interest }));
+  interests.forEach(interest => addInterest(interest));
 }
 
-/** Initialize DB if it appears to be empty (i.e. no users defined.) */
+/** Initialize DB if it appears to be empty (i.e., no users defined.) */
 if (Meteor.users.find().count() === 0) {
-  if (Meteor.settings.defaultProjects && Meteor.settings.defaultProfiles) {
+  if (Meteor.settings.defaultClubs && Meteor.settings.defaultProfiles) {
     console.log('Creating the default profiles');
-    Meteor.settings.defaultProfiles.map(profile => addProfile(profile));
-    console.log('Creating the default projects');
-    Meteor.settings.defaultProjects.map(project => addProject(project));
+    Meteor.settings.defaultProfiles.forEach(profile => addProfile(profile));
+    console.log('Creating the default clubs');
+    Meteor.settings.defaultClubs.forEach(club => addClub(club));
   } else {
-    console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
+    console.log('Cannot initialize the database! Please invoke Meteor with a settings file.');
   }
 }
 
-/**
- * If the loadAssetsFile field in settings.development.json is true, then load the data in private/data.json.
- * This approach allows you to initialize your system with large amounts of data.
- * Note that settings.development.json is limited to 64,000 characters.
- * We use the "Assets" capability in Meteor.
- * For more info on assets, see https://docs.meteor.com/api/assets.html
- * User count check is to make sure we don't load the file twice, which would generate errors due to duplicate info.
- */
-if ((Meteor.settings.loadAssetsFile) && (Meteor.users.find().count() < 7)) {
+/** If the loadAssetsFile field in settings.development.json is true, then load data from a private file. */
+if (Meteor.settings.loadAssetsFile && Meteor.users.find().count() < 7) {
   const assetsFileName = 'data.json';
   console.log(`Loading data from private/${assetsFileName}`);
   const jsonData = JSON.parse(Assets.getText(assetsFileName));
-  jsonData.profiles.map(profile => addProfile(profile));
-  jsonData.projects.map(project => addProject(project));
+  jsonData.profiles.forEach(profile => addProfile(profile));
+  jsonData.clubs.forEach(club => addClub(club)); // Assuming the structure includes clubs.
 }

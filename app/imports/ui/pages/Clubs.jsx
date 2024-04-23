@@ -14,32 +14,27 @@ import { PageIDs } from '../utilities/ids';
 
 /* Gets the Project data as well as Profiles and Interests associated with the passed Project name. */
 function getProjectData(name) {
-  const data = Clubs.collection.findOne({ name });
-  const interests = _.pluck(ClubsInterests.collection.find({ project: name }).fetch(), 'interest');
-  const profiles = _.pluck(ProfilesClubs.collection.find({ project: name }).fetch(), 'club');
-  const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile })?.picture);
-  return _.extend({}, data, { interests, participants: profilePictures });
+  return Clubs.collection.findOne({ name });
 }
 
 /* Component for layout out a Club Card. */
-const MakeCard = ({ clubs }) => (
+const MakeCard = ({ project }) => (
   <Col>
     <Card className="h-100">
       <Card.Body>
-        <Card.Img src={clubs.contact} width={50} />
-        <Card.Title style={{ marginTop: '0px' }}>{clubs.name}</Card.Title>
-        <Card.Subtitle>
-          <span className="date">{clubs.title}</span>
-        </Card.Subtitle>
-        <Card.Text>
-          {clubs.description}
-        </Card.Text>
-      </Card.Body>
-      <Card.Body>
-        {clubs.interests.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
-      </Card.Body>
-      <Card.Body>
-        {clubs.participants.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
+        <Card.Title style={{ marginTop: '0px' }}>{project.name}</Card.Title>
+        <Card.Subtitle>{project.clubType}</Card.Subtitle>
+        <Card.Text>{project.description}</Card.Text>
+        <Card.Text>Approved Date: {project.approvedDate}</Card.Text>
+        <Card.Text>Expiration Date: {project.expirationDate}</Card.Text>
+        <Card.Text>Manager: {project.clubManager}</Card.Text>
+        <Card.Text>Contact: {project.contact}</Card.Text>
+        <div>
+          Interests: {project.interests?.map((interest, index) => <Badge key={index} bg="info">{interest}</Badge>)}
+        </div>
+        <div>
+          Participants: {project.participants?.map((participant, index) => <Image key={index} roundedCircle src={participant} width={50}/>)}
+        </div>
       </Card.Body>
     </Card>
   </Col>
@@ -47,12 +42,18 @@ const MakeCard = ({ clubs }) => (
 
 MakeCard.propTypes = {
   project: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    approvedDate: PropTypes.string,
+    expirationDate: PropTypes.string,
+    clubType: PropTypes.string,
+    purpose: PropTypes.string,
+    clubManager: PropTypes.string,
+    contact: PropTypes.string,
     description: PropTypes.string,
-    name: PropTypes.string,
-    participants: PropTypes.arrayOf(PropTypes.string),
     picture: PropTypes.string,
     title: PropTypes.string,
     interests: PropTypes.arrayOf(PropTypes.string),
+    participants: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
 

@@ -90,44 +90,54 @@
       "email": "sin8@hawaii.edu"
     }
   ],
-  "defaultProjects": [
+  "defaultClubs": [
     {
-      "name": "Open Power Quality",
-      "homepage": "https://openpowerquality.org",
-      "description": "Open source hardware and software for distributed power quality data collection, analysis, and visualization.",
+      "name": "8bit (8 Business Information & Technology)",
+      "approvedDate": "3/4/24",
+      "expirationDate": "9/30/24",
+      "clubType": "",
+      "purpose": "Software solution organization that provides software services to local business or on-campus university departments. Specific software services include but are not limited to : website re-designs, organization management dashboards, mobile applications, data management systems etc. We will also teach practical in real life technical skills in the fields of software development, design and business.",
+      "clubManager": "",
+      "contact": "lmig4@hawaii.edu",
       "interests": [
-        "Software Engineering",
-        "Renewable Energy"
-      ],
-      "picture": "https://avatars0.githubusercontent.com/u/4641939"
+        "service"
+      ]
     },
     {
-      "name": "RadGrad",
-      "homepage": "https://radgrad.org",
-      "description": "Growing awesome computer scientists, one graduate at a time.",
+      "name": "Accounting Club",
+      "approvedDate": "3/4/24",
+      "expirationDate": "9/30/24",
+      "clubType": "Academic/Professional",
+      "purpose": "The purpose of this organization shall be: A. To provide members with opportunities for academic, personal, and professional development so they may contribute effectively and ethically to society and their organizations. B. To serve the community and develop conscientious members of the community through participation in civic activities. C. To build unity within the club while establishing friendships and networks that extends beyond the college career.D. To educate members about the opportunity provided by all sectors of the accounting industry. E. To aspire continuous improvement in all activities to ensure that members perform effectively in today’s business environment.",
+      "clubManager": "",
+      "contact": "aagag@hawaii.edu",
       "interests": [
-        "Educational Technology"
-      ],
-      "picture": "https://www.radgrad.org/img/radgrad_logo.png"
+        "Accounting"
+      ]
     },
     {
-      "name": "WRENCH",
-      "homepage": "https://wrench-project.org",
-      "description": "WRENCH is an open-source library for developing simulators for large-scale scientific computation",
+      "name": "Advocates for Public Interest Law",
+      "approvedDate": "3/4/24",
+      "expirationDate": "9/30/24",
+      "clubType": "Political",
+      "purpose": "APIL aims to raise the consciousness of Hawai‘i’s law students and the entire legal community regarding public interest law. APIL does so by holding educational events and panels with Hawai'i attorneys working in public interest fields and by awarding several grants each spring to Hawai‘i law students, enabling them to intern with various public interest organizations during their summer recess. The goal of these grants is to provide legal services to underrepresented groups in the community, while providing valuable training and experience to each of our grantees.",
+      "clubManager": "",
+      "contact": "aagag@hawaii.edu",
       "interests": [
-        "Distributed computing"
-      ],
-      "picture": "https://wrench-project.org/images/logo-vertical.png"
+        "Politics"
+      ]
     },
     {
-      "name": "Cyber Canoe",
-      "homepage": "http://lava.manoa.hawaii.edu/blog/2014/07/11/cyber-canoe-cyber-infrastructure-enabled-collaborative-analysis-navigation-and-observation-environment/",
-      "description": "Software for Unity projects involving stereoscopic resolution driven by 9 PCs with a GeForce 980 graphics card.",
+      "name": "Addiction Medicine & Harm Reduction Interest Group",
+      "dateApproved": "3/4/24",
+      "expirationDate": "9/30/24",
+      "clubType": "Academic/Professional",
+      "purpose": "“The Addiction Medicine & Harm Reduction Interest Group aims to increase student understanding of harm reduction principles and practices in the context of addiction medicine and public health, with a particular focus on Hawai'i-specific challenges and resources.",
+      "clubManager": "",
+      "contact": "aagag@hawaii.edu",
       "interests": [
-        "Unity",
-        "Visualization"
-      ],
-      "picture": "https://www.hawaii.edu/its/wp-content/uploads/sites/2/2019/01/LAVAlogo-300x192-300x192.png"
+        "Medicine"
+      ]
     }
   ],
   "loadAssetsFile":  false

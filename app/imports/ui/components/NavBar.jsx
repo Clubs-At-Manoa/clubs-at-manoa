@@ -7,13 +7,13 @@ import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons
 import { ComponentIDs } from '../utilities/ids';
 
 const NavBar = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { currentUser, loggedIn } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
     loggedIn: !!Meteor.user(),
   }), []);
   const menuStyle = { marginBottom: '0px' };
   const navbarClassName = loggedIn ? 'bg-dark' : 'bg-light';
+
   return (
     <Navbar expand="lg" style={menuStyle} className={navbarClassName}>
       <Container>
@@ -27,7 +27,7 @@ const NavBar = () => {
               <Nav.Link as={NavLink} id={ComponentIDs.homeMenuItem} to="/home" key="home">Home</Nav.Link>
             ) : ''}
             <Nav.Link as={NavLink} id={ComponentIDs.profilesMenuItem} to="/profiles" key="profiles">Profiles</Nav.Link>
-            <Nav.Link as={NavLink} id={ComponentIDs.projectsMenuItem} to="/projects" key="projects">Projects</Nav.Link>
+            <Nav.Link as={NavLink} id={ComponentIDs.projectsMenuItem} to="/clubs" key="projects">Clubs</Nav.Link>
             <Nav.Link as={NavLink} id={ComponentIDs.interestsMenuItem} to="/interests" key="interests">Interests</Nav.Link>
             {currentUser ? (
               [<Nav.Link as={NavLink} id={ComponentIDs.addProjectMenuItem} to="/addProject" key="addP">Add Project</Nav.Link>,
@@ -52,7 +52,6 @@ const NavBar = () => {
               <NavDropdown id={ComponentIDs.currentUserDropdown} title={currentUser}>
                 <NavDropdown.Item id={ComponentIDs.currentUserDropdownSignOut} as={NavLink} to="/signout">
                   <BoxArrowRight />
-                  {' '}
                   Sign
                   out
                 </NavDropdown.Item>
