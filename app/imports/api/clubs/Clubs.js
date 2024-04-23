@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
 /** Encapsulates state and variable values for this collection. */
-class ProjectsCollection {
+class Clubs {
   constructor() {
     // The name of this collection.
     this.name = 'ProjectsCollection';
@@ -23,4 +23,4 @@ class ProjectsCollection {
   }
 }
 
-export const Projects = new ProjectsCollection();
+export const Clubs = new Clubs();

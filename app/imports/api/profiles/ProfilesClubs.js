@@ -11,7 +11,7 @@ class ProfilesProjectsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       profile: String,
-      project: String,
+      club: String,
     });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
@@ -21,4 +21,4 @@ class ProfilesProjectsCollection {
   }
 }
 
-export const ProfilesProjects = new ProfilesProjectsCollection();
+export const ProfilesClubs = new ProfilesProjectsCollection();
