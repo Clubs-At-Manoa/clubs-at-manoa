@@ -60,11 +60,11 @@ const InterestsPage = () => {
     const sub6 = Meteor.subscribe(ProfilesInterests.userPublicationName);
 
     const interests = _.pluck(Interests.collection.find().fetch(), 'name');
-    const interestData = interests.map(interest => getInterestData(interest));
+    const fetchedInterestData = interests.map(interest => getInterestData(interest));
 
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
-      interestData,
+      interestData: fetchedInterestData, // Use renamed variable here
     };
   }, []);
 
