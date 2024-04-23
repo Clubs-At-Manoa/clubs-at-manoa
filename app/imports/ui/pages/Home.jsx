@@ -10,7 +10,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Interests } from '../../api/interests/Interests';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
 import { Projects } from '../../api/projects/Projects';
 import { updateProfileMethod } from '../../startup/both/Methods';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -50,7 +50,7 @@ const Home = () => {
     const sub1 = Meteor.subscribe(Interests.userPublicationName);
     const sub2 = Meteor.subscribe(Profiles.userPublicationName);
     const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-    const sub4 = Meteor.subscribe(ProfilesProjects.userPublicationName);
+    const sub4 = Meteor.subscribe(ProfilesClubs.userPublicationName);
     const sub5 = Meteor.subscribe(Projects.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
@@ -63,7 +63,7 @@ const Home = () => {
   const formSchema = makeSchema(allInterests, allProjects);
   const bridge = new SimpleSchema2Bridge(formSchema);
   // Now create the model with all the user information.
-  const projects = _.pluck(ProfilesProjects.collection.find({ profile: email }).fetch(), 'project');
+  const projects = _.pluck(ProfilesClubs.collection.find({ profile: email }).fetch(), 'project');
   const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
   const profile = Profiles.collection.findOne({ email });
   const model = _.extend({}, profile, { interests, projects });

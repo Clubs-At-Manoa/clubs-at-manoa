@@ -10,7 +10,7 @@ import { AutoForm, SelectField, SubmitField } from 'uniforms-bootstrap5';
 import { Interests } from '../../api/interests/Interests';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
+import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
 import { Projects } from '../../api/projects/Projects';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useStickyState } from '../utilities/StickyState';
@@ -26,7 +26,7 @@ const makeSchema = (allInterests) => new SimpleSchema({
 function getProfileData(email) {
   const data = Profiles.collection.findOne({ email });
   const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
-  const projects = _.pluck(ProfilesProjects.collection.find({ profile: email }).fetch(), 'project');
+  const projects = _.pluck(ProfilesClubs.collection.find({ profile: email }).fetch(), 'project');
   const projectPictures = projects.map(project => Projects.collection.findOne({ name: project }).picture);
   return _.extend({}, data, { interests, projects: projectPictures });
 }
@@ -73,7 +73,7 @@ const Filter = () => {
     // Ensure that minimongo is populated with all collections prior to running render().
     const sub1 = Meteor.subscribe(Profiles.userPublicationName);
     const sub2 = Meteor.subscribe(ProfilesInterests.userPublicationName);
-    const sub3 = Meteor.subscribe(ProfilesProjects.userPublicationName);
+    const sub3 = Meteor.subscribe(ProfilesClubs.userPublicationName);
     const sub4 = Meteor.subscribe(Projects.userPublicationName);
     const sub5 = Meteor.subscribe(Interests.userPublicationName);
     return {

@@ -7,14 +7,14 @@ import { _ } from 'meteor/underscore';
 import { Interests } from '../../api/interests/Interests';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesClubs } from '../../api/profiles/ProfilesProjects';
-import { Clubs } from '../../api/projects/Projects';
-import { ClubsInterests } from '../../api/projects/ProjectsInterests';
+import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
+import { Clubs } from '../../api/clubs/Clubs';
+import { ClubsInterests } from '../../api/clubs/ClubsInterests';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
 import { PageIDs } from '../utilities/ids';
 
-/* Returns the Profiles and Projects associated with the passed Interest. */
+/* Returns the Profiles and Clubs associated with the passed Interest. */
 function getInterestData(name) {
   const profiles = _.pluck(ProfilesInterests.collection.find({ interest: name }).fetch(), 'profile');
   const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile })?.picture);
@@ -22,7 +22,6 @@ function getInterestData(name) {
   const projectPictures = projects.map(project => Clubs.collection.findOne({ name: project })?.picture);
 
   return { name, profiles: profilePictures || [], projects: projectPictures || [] };
-
 }
 
 /* Component for laying out an Interest Card. */

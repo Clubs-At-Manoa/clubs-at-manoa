@@ -21,4 +21,4 @@ class ProfilesProjectsCollection {
   }
 }
 
-export const ProfilesProjects = new ProfilesProjectsCollection();
+export const ProfilesClubs = new ProfilesProjectsCollection();

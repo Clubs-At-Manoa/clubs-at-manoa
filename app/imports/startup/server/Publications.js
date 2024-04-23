@@ -2,24 +2,44 @@ import { Meteor } from 'meteor/meteor';
 import { Interests } from '../../api/interests/Interests';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
-import { ProfilesProjects } from '../../api/profiles/ProfilesProjects';
-import { Projects } from '../../api/projects/Projects';
+import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
+import { Clubs } from '../../api/clubs/Clubs';
 import { ClubsInterests } from '../../api/clubs/ClubsInterests';
 
 /** Define a publication to publish all interests. */
-Meteor.publish(Interests.userPublicationName, () => Interests.collection.find());
+if (Interests && Interests.userPublicationName && Interests.collection) {
+  Meteor.publish(Interests.userPublicationName, () => Interests.collection.find());
+} else {
+  console.error('Error publishing Interests: missing data');
+}
 
 /** Define a publication to publish all profiles. */
-Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
+if (Profiles && Profiles.userPublicationName && Profiles.collection) {
+  Meteor.publish(Profiles.userPublicationName, () => Profiles.collection.find());
+} else {
+  console.error('Error publishing Profiles: missing data');
+}
 
 /** Define a publication to publish this collection. */
-Meteor.publish(ProfilesInterests.userPublicationName, () => ProfilesInterests.collection.find());
+if (ProfilesInterests && ProfilesInterests.userPublicationName && ProfilesInterests.collection) {
+  Meteor.publish(ProfilesInterests.userPublicationName, () => ProfilesInterests.collection.find());
+} else {
+  console.error('Error publishing ProfilesInterests: missing data');
+}
 
 /** Define a publication to publish this collection. */
-Meteor.publish(ProfilesProjects.userPublicationName, () => ProfilesProjects.collection.find());
+if (ProfilesClubs && ProfilesClubs.userPublicationName && ProfilesClubs.collection) {
+  Meteor.publish(ProfilesClubs.userPublicationName, () => ProfilesClubs.collection.find());
+} else {
+  console.error('Error publishing ProfilesClubs: missing data');
+}
 
 /** Define a publication to publish all projects. */
-Meteor.publish(Projects.userPublicationName, () => Projects.collection.find());
+if (Clubs && Clubs.userPublicationName && Clubs.collection) {
+  Meteor.publish(Clubs.userPublicationName, () => Clubs.collection.find());
+} else {
+  console.error('Error publishing Clubs: missing data');
+}
 
 /** Define a publication to publish this collection. */
 if (ClubsInterests && ClubsInterests.userPublicationName && ClubsInterests.collection) {
