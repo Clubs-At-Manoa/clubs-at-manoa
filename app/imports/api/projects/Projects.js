@@ -11,9 +11,12 @@ class ProjectsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       name: { type: String, index: true, unique: true },
-      homepage: { type: String, optional: true },
-      description: { type: String, optional: true },
-      picture: { type: String, optional: true },
+      approvedDate: { type: String, optional: true },
+      expirationDate: { type: String, optional: true },
+      clubType: { type: String, optional: true },
+      purpose: { type: String, optional: true },
+      clubManager: { type: String, optional: true },
+      contact: { type: String, optional: true },
     });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
