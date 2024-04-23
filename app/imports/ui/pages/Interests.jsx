@@ -17,21 +17,25 @@ import { PageIDs } from '../utilities/ids';
 /* Returns the Profiles and Clubs associated with the passed Interest. */
 function getInterestData(name) {
   const profiles = _.pluck(ProfilesInterests.collection.find({ interest: name }).fetch(), 'profile');
-  const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile }).picture);
+  const profilePictures = profiles.map(profile => Profiles.collection.findOne({ email: profile })?.picture);
   const projects = _.pluck(ClubsInterests.collection.find({ interest: name }).fetch(), 'project');
   const projectPictures = projects.map(project => Clubs.collection.findOne({ name: project })?.picture);
-  // console.log(_.extend({ }, data, { interests, projects: projectPictures }));
-  return _.extend({}, { name, profiles: profilePictures, projects: projectPictures });
+
+  return { name, profiles: profilePictures || [], projects: projectPictures || [] };
 }
 
-/* Component for layout out an Interest Card. */
+/* Component for laying out an Interest Card. */
 const MakeCard = ({ interest }) => (
   <Col>
     <Card className="h-100">
       <Card.Body>
         <Card.Title style={{ marginTop: '0px' }}>{interest.name}</Card.Title>
-        {interest.profiles.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
-        {interest.clubs.map((p, index) => <Image key={index} roundedCircle src={p} width={50} />)}
+        {interest.profiles?.map((p, index) => (
+          <Image key={index} roundedCircle src={p} width={50} />
+        ))}
+        {interest.projects?.map((p, index) => (
+          <Image key={index} roundedCircle src={p} width={50} />
+        ))}
       </Card.Body>
     </Card>
   </Col>
@@ -39,30 +43,31 @@ const MakeCard = ({ interest }) => (
 
 MakeCard.propTypes = {
   interest: PropTypes.shape({
-    name: PropTypes.string,
-    profiles: PropTypes.arrayOf(PropTypes.string),
-    projects: PropTypes.arrayOf(PropTypes.string),
+    name: PropTypes.string.isRequired,
+    profiles: PropTypes.arrayOf(PropTypes.string), // URLs to profile images
+    projects: PropTypes.arrayOf(PropTypes.string), // URLs to project images
   }).isRequired,
 };
 
 /* Renders the Interests as a set of Cards. */
 const InterestsPage = () => {
-
-  /* If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  const { ready } = useTracker(() => {
-    // Ensure that minimongo is populated with all collections prior to running render().
+  const { ready, interestData } = useTracker(() => {
     const sub1 = Meteor.subscribe(ProfilesClubs.userPublicationName);
     const sub2 = Meteor.subscribe(Clubs.userPublicationName);
     const sub3 = Meteor.subscribe(ClubsInterests.userPublicationName);
     const sub4 = Meteor.subscribe(Profiles.userPublicationName);
     const sub5 = Meteor.subscribe(Interests.userPublicationName);
     const sub6 = Meteor.subscribe(ProfilesInterests.userPublicationName);
+
+    const interests = _.pluck(Interests.collection.find().fetch(), 'name');
+    const interestData = interests.map(interest => getInterestData(interest));
+
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready() && sub6.ready(),
+      interestData,
     };
   }, []);
-  const interests = _.pluck(Interests.collection.find().fetch(), 'name');
-  const interestData = interests.map(interest => getInterestData(interest));
+
   return ready ? (
     <Container id={PageIDs.interestsPage} style={pageStyle}>
       <Row xs={1} md={2} lg={4} className="g-2">
