@@ -11,7 +11,6 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import Clubs from '../pages/Clubs';
-import Projects from '../pages/Clubs';
 import Interests from '../pages/Interests';
 import Home from '../pages/Home';
 import Filter from '../pages/Filter';
