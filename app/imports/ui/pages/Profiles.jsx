@@ -52,7 +52,7 @@ MakeCard.propTypes = {
     bio: PropTypes.string,
     picture: PropTypes.string,
     title: PropTypes.string,
-    interests: PropTypes.arrayOf(PropTypes.string),
+    interest: PropTypes.arrayOf(PropTypes.string),
     projects: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };
