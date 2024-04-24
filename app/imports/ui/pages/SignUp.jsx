@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom'; // add back navigate
 import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
@@ -35,7 +35,7 @@ const SignUp = () => {
 
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
-    return (<Navigate to="/home" />);
+    return (<Navigate to="/createprofile" />);
   }
   return (
     <Container id={PageIDs.signUpPage}>

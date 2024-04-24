@@ -11,7 +11,7 @@ import { Interests } from '../../api/interests/Interests';
 import { Profiles } from '../../api/profiles/Profiles';
 import { ProfilesInterests } from '../../api/profiles/ProfilesInterests';
 import { ProfilesClubs } from '../../api/profiles/ProfilesClubs';
-import { Projects } from '../../api/projects/Projects';
+import { Clubs } from '../../api/clubs/Clubs';
 import { updateProfileMethod } from '../../startup/both/Methods';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { pageStyle } from './pageStyles';
@@ -27,7 +27,7 @@ const makeSchema = (allInterests, allProjects) => new SimpleSchema({
   picture: { type: String, label: 'Picture URL', optional: true },
   interests: { type: Array, label: 'Interests', optional: true },
   'interests.$': { type: String, allowedValues: allInterests },
-  projects: { type: Array, label: 'Projects', optional: true },
+  clubs: { type: Array, label: 'Clubs', optional: true },
   'projects.$': { type: String, allowedValues: allProjects },
 });
 
@@ -51,7 +51,7 @@ const Home = () => {
     const sub2 = Meteor.subscribe(Profiles.userPublicationName);
     const sub3 = Meteor.subscribe(ProfilesInterests.userPublicationName);
     const sub4 = Meteor.subscribe(ProfilesClubs.userPublicationName);
-    const sub5 = Meteor.subscribe(Projects.userPublicationName);
+    const sub5 = Meteor.subscribe(Clubs.userPublicationName);
     return {
       ready: sub1.ready() && sub2.ready() && sub3.ready() && sub4.ready() && sub5.ready(),
       email: Meteor.user()?.username,
@@ -59,14 +59,14 @@ const Home = () => {
   }, []);
   // Create the form schema for uniforms. Need to determine all interests and projects for muliselect list.
   const allInterests = _.pluck(Interests.collection.find().fetch(), 'name');
-  const allProjects = _.pluck(Projects.collection.find().fetch(), 'name');
+  const allProjects = _.pluck(Clubs.collection.find().fetch(), 'name');
   const formSchema = makeSchema(allInterests, allProjects);
   const bridge = new SimpleSchema2Bridge(formSchema);
   // Now create the model with all the user information.
-  const projects = _.pluck(ProfilesClubs.collection.find({ profile: email }).fetch(), 'project');
+  const clubs = _.pluck(ProfilesClubs.collection.find({ profile: email }).fetch(), 'clubs');
   const interests = _.pluck(ProfilesInterests.collection.find({ profile: email }).fetch(), 'interest');
   const profile = Profiles.collection.findOne({ email });
-  const model = _.extend({}, profile, { interests, projects });
+  const model = _.extend({}, profile, { interests, clubs });
   return ready ? (
     <Container id={PageIDs.homePage} className="justify-content-center" style={pageStyle}>
       <Col>
@@ -86,7 +86,7 @@ const Home = () => {
               </Row>
               <Row>
                 <Col xs={6}><SelectField name="interests" showInlineError multiple /></Col>
-                <Col xs={6}><SelectField name="projects" showInlineError multiple /></Col>
+                <Col xs={6}><SelectField name="clubs" showInlineError multiple /></Col>
               </Row>
               <SubmitField id={ComponentIDs.homeFormSubmit} value="Update" />
             </Card.Body>

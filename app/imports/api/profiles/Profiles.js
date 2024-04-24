@@ -10,12 +10,17 @@ class ProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      email: { type: String, index: true, unique: true },
+      email: { type: String, unique: true },
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
       title: { type: String, optional: true },
       picture: { type: String, optional: true },
+      interest: {
+        type: String,
+        allowedValues: ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Religious/Spiritual', 'Service', 'Sports/Leisure', 'Student Affairs'],
+        defaultValue: 'Academic/Professional',
+      },
     });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
