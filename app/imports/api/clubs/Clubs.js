@@ -10,7 +10,7 @@ class ClubsCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      ame: { type: String, index: true, unique: true },
+      name: { type: String, index: true, unique: true },
       homepage: { type: String, optional: true },
       description: { type: String, optional: true },
       contact: { type: String, optional: true },
