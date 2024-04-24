@@ -17,6 +17,8 @@ class ClubsCollection {
       purpose: { type: String, optional: true },
       clubManager: { type: String, optional: true },
       contact: { type: String, optional: true },
+      // eslint-disable-next-line max-len
+      interestType: { type: String, allowedValues: ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Religious/Spiritual', 'Service', 'Sports/Leisure', 'Student Affairs'], defaultValue: ' ' },
     });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
