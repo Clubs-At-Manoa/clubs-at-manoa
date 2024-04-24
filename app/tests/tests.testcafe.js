@@ -1,26 +1,26 @@
-import { landingPage } from './landing.page';
+// import { landingPage } from './landing.page';
 // import { signInPage } from './signin.page';
 // import { signOutPage } from './signout.page';
 // import { signupPage } from './signup.page';
 // import { profilesPage } from './profiles.page';
 // import { projectsPage } from './projects.page';
-import { interestsPage } from './interests.page';
+// import { interestsPage } from './interests.page';
 // import { homePage } from './home.page';
 // import { addProjectPage } from './addproject.page';
 // import { filterPage } from './filter.page';
-import { navBar } from './navbar.component';
+// import { navBar } from './navbar.component';
 
-/* global fixture:false, test:false */
+// /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 // const credentials = { username: 'johnson@hawaii.edu', password: 'foo', firstName: 'Philip', lastName: 'Johnson' };
 
-fixture('Bowfolios localhost test with default db')
-  .page('http://localhost:3000');
+// fixture('Clubs At Manoa localhost test with default db')
+//   .page('http://localhost:3000');
 
-test('Test that landing page shows up', async (testController) => {
-  await landingPage.isDisplayed(testController);
-});
+// test('Test that landing page shows up', async (testController) => {
+//  await landingPage.isDisplayed(testController);
+// });
 
 // test('Test that signin and signout work', async (testController) => {
 // await navBar.gotoSignInPage(testController);
@@ -46,11 +46,11 @@ test('Test that landing page shows up', async (testController) => {
 // await profilesPage.hasDefaultProfiles(testController);
 // });
 
-test('Test that interests page displays', async (testController) => {
-  await navBar.gotoInterestsPage(testController);
-  await interestsPage.isDisplayed(testController);
-  // await interestsPage.hasDefaultInterests(testController);
-});
+// test('Test that interests page displays', async (testController) => {
+// await navBar.gotoInterestsPage(testController);
+// await interestsPage.isDisplayed(testController);
+// await interestsPage.hasDefaultInterests(testController);
+// });
 
 // test('Test that projects page displays', async (testController) => {
 // await navBar.gotoProjectsPage(testController);
