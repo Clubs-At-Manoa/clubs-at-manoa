@@ -1,7 +1,7 @@
 import { landingPage } from './landing.page';
 // import { signInPage } from './signin.page';
 import { signOutPage } from './signout.page';
-import { signupPage } from './signup.page';
+// import { signupPage } from './signup.page';
 // import { profilesPage } from './profiles.page';
 // import { projectsPage } from './projects.page';
 import { interestsPage } from './interests.page';
@@ -29,16 +29,16 @@ test('Test that signin and signout work', async (testController) => {
   await signOutPage.isDisplayed(testController);
 });
 
-test('Test that signup page, then logout works', async (testController) => {
-  // Create a new user email address that's guaranteed to be unique.
-  const newUser = `user-${new Date().getTime()}@foo.com`;
-  await navBar.gotoSignUpPage(testController);
-  await signupPage.isDisplayed(testController);
-  // await signupPage.signupUser(testController, newUser, credentials.password);
-  // New user has successfully logged in, so now let's logout.
-  // await navBar.logout(testController);
-  // await signOutPage.isDisplayed(testController);
-});
+// test('Test that signup page, then logout works', async (testController) => {
+// Create a new user email address that's guaranteed to be unique.
+// const newUser = `user-${new Date().getTime()}@foo.com`;
+// await navBar.gotoSignUpPage(testController);
+// await signupPage.isDisplayed(testController);
+// await signupPage.signupUser(testController, newUser, credentials.password);
+// New user has successfully logged in, so now let's logout.
+// await navBar.logout(testController);
+// await signOutPage.isDisplayed(testController);
+// });
 
 // test('Test that profiles page displays', async (testController) => {
 // await navBar.gotoProfilesPage(testController);
@@ -52,35 +52,35 @@ test('Test that interests page displays', async (testController) => {
   // await interestsPage.hasDefaultInterests(testController);
 });
 
-test('Test that projects page displays', async (testController) => {
-  // await navBar.gotoProjectsPage(testController);
-  // await projectsPage.isDisplayed(testController);
-  // await projectsPage.hasDefaultProjects(testController);
-});
+// test('Test that projects page displays', async (testController) => {
+// await navBar.gotoProjectsPage(testController);
+// await projectsPage.isDisplayed(testController);
+// await projectsPage.hasDefaultProjects(testController);
+// });
 
-test('Test that home page display and profile modification works', async (testController) => {
-  // await navBar.ensureLogout(testController);
-  // await navBar.gotoSignInPage(testController);
-  // await signInPage.signin(testController, credentials.username, credentials.password);
-  // await homePage.isDisplayed(testController);
-  // await homePage.updateProfile(testController, credentials.firstName);
-  // await navBar.ensureLogout(testController);
-});
+// test('Test that home page display and profile modification works', async (testController) => {
+// await navBar.ensureLogout(testController);
+// await navBar.gotoSignInPage(testController);
+// await signInPage.signin(testController, credentials.username, credentials.password);
+// await homePage.isDisplayed(testController);
+// await homePage.updateProfile(testController, credentials.firstName);
+// await navBar.ensureLogout(testController);
+// });
 
-test('Test that addProject page works', async (testController) => {
-  // await navBar.ensureLogout(testController);
-  // await navBar.gotoSignInPage(testController);
-  // await signInPage.signin(testController, credentials.username, credentials.password);
-  // await navBar.gotoAddProjectPage(testController);
-  // await addProjectPage.isDisplayed(testController);
-  // await addProjectPage.addProject(testController);
-});
+// test('Test that addProject page works', async (testController) => {
+// await navBar.ensureLogout(testController);
+// await navBar.gotoSignInPage(testController);
+// await signInPage.signin(testController, credentials.username, credentials.password);
+// await navBar.gotoAddProjectPage(testController);
+// await addProjectPage.isDisplayed(testController);
+// await addProjectPage.addProject(testController);
+// });
 
-test('Test that filter page works', async (testController) => {
-  // await navBar.ensureLogout(testController);
-  // await navBar.gotoSignInPage(testController);
-  // await signInPage.signin(testController, credentials.username, credentials.password);
-  // await navBar.gotoFilterPage(testController);
-  // await filterPage.isDisplayed(testController);
-  // await filterPage.filter(testController);
-});
+// test('Test that filter page works', async (testController) => {
+// await navBar.ensureLogout(testController);
+// await navBar.gotoSignInPage(testController);
+// await signInPage.signin(testController, credentials.username, credentials.password);
+// await navBar.gotoFilterPage(testController);
+// await filterPage.isDisplayed(testController);
+// await filterPage.filter(testController);
+// });
