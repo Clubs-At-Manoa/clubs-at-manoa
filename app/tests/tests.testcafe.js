@@ -1,6 +1,6 @@
 import { landingPage } from './landing.page';
 // import { signInPage } from './signin.page';
-import { signOutPage } from './signout.page';
+// import { signOutPage } from './signout.page';
 // import { signupPage } from './signup.page';
 // import { profilesPage } from './profiles.page';
 // import { projectsPage } from './projects.page';
@@ -15,7 +15,7 @@ import { navBar } from './navbar.component';
 /** Credentials for one of the sample users defined in settings.development.json. */
 // const credentials = { username: 'johnson@hawaii.edu', password: 'foo', firstName: 'Philip', lastName: 'Johnson' };
 
-fixture('Bowfolios localhost test with default db')
+fixture('Clubs At Manoa localhost test with default db')
   .page('http://localhost:3000');
 
 test('Test that landing page shows up', async (testController) => {
