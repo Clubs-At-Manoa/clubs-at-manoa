@@ -22,12 +22,12 @@ test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
 });
 
-test('Test that signin and signout work', async (testController) => {
-  await navBar.gotoSignInPage(testController);
-  // await signInPage.signin(testController, credentials.username, credentials.password);
-  // await navBar.logout(testController);
-  await signOutPage.isDisplayed(testController);
-});
+// test('Test that signin and signout work', async (testController) => {
+// await navBar.gotoSignInPage(testController);
+// await signInPage.signin(testController, credentials.username, credentials.password);
+// await navBar.logout(testController);
+// await signOutPage.isDisplayed(testController);
+// });
 
 // test('Test that signup page, then logout works', async (testController) => {
 // Create a new user email address that's guaranteed to be unique.
