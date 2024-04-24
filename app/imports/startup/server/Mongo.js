@@ -46,23 +46,30 @@ function addClub({ name, approvedDate, expirationDate, clubType, purpose, clubMa
   interests.forEach(interest => addInterest(interest));
 }
 
-/** Initialize DB if it appears to be empty (i.e., no users defined.) */
-if (Meteor.users.find().count() === 0) {
-  if (Meteor.settings.defaultClubs && Meteor.settings.defaultProfiles) {
-    console.log('Creating the default profiles');
-    Meteor.settings.defaultProfiles.forEach(profile => addProfile(profile));
-    console.log('Creating the default clubs');
-    Meteor.settings.defaultClubs.forEach(club => addClub(club));
-  } else {
-    console.log('Cannot initialize the database! Please invoke Meteor with a settings file.');
+Meteor.startup(() => {
+  // Optional: Clear the database on startup
+  if (Meteor.settings.resetDB) {
+    console.log('Resetting database...');
+    Profiles.collection.remove({});
+    ProfilesClubs.collection.remove({});
+    ProfilesInterests.collection.remove({});
+    Clubs.collection.remove({});
+    ClubsInterests.collection.remove({});
+    Interests.collection.remove({});
   }
-}
 
-/** If the loadAssetsFile field in settings.development.json is true, then load data from a private file. */
-if (Meteor.settings.loadAssetsFile && Meteor.users.find().count() < 7) {
-  const assetsFileName = 'data.json';
-  console.log(`Loading data from private/${assetsFileName}`);
-  const jsonData = JSON.parse(Assets.getText(assetsFileName));
-  jsonData.profiles.forEach(profile => addProfile(profile));
-  jsonData.clubs.forEach(club => addClub(club)); // Assuming the structure includes clubs.
-}
+  if (Meteor.users.find().count() === 0) {
+    console.log('Initializing default data...');
+    Meteor.settings.defaultProfiles?.forEach(addProfile);
+    Meteor.settings.defaultClubs?.forEach(addClub);
+  }
+
+  // Load data from a private file if specified
+  if (Meteor.settings.loadAssetsFile && Meteor.users.find().count() < 7) {
+    const assetsFileName = 'data.json';
+    console.log(`Loading data from private/${assetsFileName}`);
+    const jsonData = JSON.parse(Assets.getText(assetsFileName));
+    jsonData.profiles.forEach(addProfile);
+    jsonData.clubs.forEach(addClub);
+  }
+});
