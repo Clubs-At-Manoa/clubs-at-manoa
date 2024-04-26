@@ -10,7 +10,7 @@ class ProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      email: { type: String, unique: true },
+      email: { type: String, index: true, unique: true },
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
