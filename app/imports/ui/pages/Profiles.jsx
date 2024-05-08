@@ -47,13 +47,13 @@ const MakeCard = ({ profile }) => (
 
 MakeCard.propTypes = {
   profile: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    bio: PropTypes.string,
-    picture: PropTypes.string,
-    title: PropTypes.string,
-    interest: PropTypes.arrayOf(PropTypes.string),
-    projects: PropTypes.arrayOf(PropTypes.string),
+    picture: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    interests: PropTypes.arrayOf(PropTypes.string).isRequired,
+    projects: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 

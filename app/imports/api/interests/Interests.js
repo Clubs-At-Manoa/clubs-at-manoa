@@ -11,7 +11,11 @@ class InterestsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       // eslint-disable-next-line max-len
-      interestType: { type: String, allowedValues: ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Religious/Spiritual', 'Service', 'Sports/Leisure', 'Student Affairs'], defaultValue: ' ' },
+      interest: {
+        type: String,
+        allowedValues: ['Academic/Professional', 'Ethnic/Cultural', 'Fraternity/Sorority', 'Honorary Society', 'Leisure/Recreational', 'Political', 'Religious/Spiritual', 'Service', 'Sports/Leisure', 'Student Affairs'],
+        defaultValue: 'Academic/Professional',
+      },
     });
     // Ensure collection documents obey schema.
     this.collection.attachSchema(this.schema);
