@@ -23,6 +23,13 @@ class ProjectsCollection {
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
+
+    this.collection.allow({
+      update(userId) {
+        // Allow update if the user is logged in
+        return !!userId;
+      },
+    });
   }
 }
 
